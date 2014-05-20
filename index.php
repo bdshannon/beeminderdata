@@ -45,9 +45,10 @@
 
             private function toHtmlTableHeader() {
                 $html = "<thead><tr>";
-                foreach($this->headers as $header) {
+                foreach(array_keys($this->headers) as $header) {
                     $html .= sprintf("<th>%s</th>", ucwords($header));
                 }
+                unset($header);
                 $html .= "</tr></thead>";
                 return $html;
             }
@@ -56,11 +57,13 @@
                 $html = "<tbody>";
                 foreach($this->data as $dataobj) {
                     $html .= "<tr>";
-                    foreach($this->headers as $header) {
-                        $html .= sprintf("<td>%s</td>", $dataobj->{$header});
+                    foreach($this->headers as $propname) {
+                        $html .= sprintf("<td>%s</td>", $dataobj->{$propname});
                     }
+                    unset($propname);
                     $html .= "</tr>";
                 }
+                unset($dataobj);
                 $html .= "</tbody>";
                 return $html;
             }
@@ -94,8 +97,21 @@
             $goals[] = $goal;
         }
 
+        array_map(function($goal) {
+            $goal->losedatestring = date("d-m-y", $goal->losedate);
+        }, $goals);
+
+        array_map(function($goal) {
+           $goal->pledgestring = sprintf("$%s", $goal->pledge);
+        }, $goals);
+
         $table_args = $goals;
-        array_unshift($table_args, ["title", "pledge"]);
+        $headers = [
+            "Title" => "title",
+            "Pledge" => "pledgestring",
+            "Lose Date" => "losedatestring",
+        ];
+        array_unshift($table_args, $headers);
         $tbuilderfactory = new ReflectionClass("TableBuilder");
         $tbuilder = $tbuilderfactory->newInstanceArgs($table_args);
         $tbuilder->css_classes[] = "table";
