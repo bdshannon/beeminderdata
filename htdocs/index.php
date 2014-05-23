@@ -14,6 +14,8 @@
 
     You should have received a copy of the GNU Affero General Public License
     along with BeeminderPublicData.  If not, see <http://www.gnu.org/licenses/>.
+
+    Copyright Brian Shannon 2014
 **/
 ?>
 <!DOCTYPE html>
