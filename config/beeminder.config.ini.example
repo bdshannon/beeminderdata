@@ -1,0 +1,6 @@
+[Beeminder]
+auth_token = 0123456789
+username = myusername
+goals[] = goalslug1
+goals[] = goalslug2
+goals[] = goalslug3

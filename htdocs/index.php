@@ -79,15 +79,12 @@
 
         # FIXME: fetching from a url should be done in a cronjob
         $urlfmt = "https://www.beeminder.com/api/v1/users/%s/goals/%s.json?datapoints=False&auth_token=%s";
-        $tokenfile = "./token.txt"; # FIXME: this should definitely be changed
-        $token = trim(file_get_contents($tokenfile));
+        $configfilename = "../config/beeminder.config.ini";
+        $config = parse_ini_file($configfilename);
 
-        $usernamefile = "./username.txt";
-        $username = trim(file_get_contents($usernamefile));
-
-        $goalslugsfile = "./goalslugs.txt"; # it's okay for this to be public
-        $goalslugsstring = trim(file_get_contents($goalslugsfile));
-        $goalslugs = split("\n", $goalslugsstring);
+        $token = trim($config["auth_token"]);
+        $username = trim($config["username"]);
+        $goalslugs = $config["goals"];
 
         $goals = [];
         foreach($goalslugs as $goalslug) {
