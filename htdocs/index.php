@@ -104,11 +104,20 @@
            $goal->pledgestring = sprintf("$%s", $goal->pledge);
         }, $goals);
 
+        array_map(function($goal) {
+            $losedate = new DateTime();
+            $losedate->setTimestamp($goal->losedate);
+            $goal->timeuntillose = $losedate->diff(new DateTime("now"));
+            $goal->timeuntillosestring = $goal->timeuntillose->days . " days, " .
+                                         $goal->timeuntillose->h . " hours";
+        }, $goals);
+
         $table_args = $goals;
         $headers = [
             "Title" => "title",
             "Pledge" => "pledgestring",
             "Lose Date" => "losedatestring",
+            "Time Until Lose" => "timeuntillosestring",
         ];
         array_unshift($table_args, $headers);
         $tbuilderfactory = new ReflectionClass("TableBuilder");
