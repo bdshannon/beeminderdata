@@ -32,6 +32,18 @@
 <body>
     <p>I have stuff to do. These are some of those things.</p>
     <?php
+        function fget_contents() {
+            $args = func_get_args();
+            // the @ can be removed if you lower error_reporting level
+            $contents = @call_user_func_array('file_get_contents', $args);
+
+            if ($contents === false) {
+                throw new Exception('Failed to open ' . $file);
+            } else {
+                return $contents;
+            }
+        }
+
         class TableBuilder {
             function __construct() {
                 $args = func_get_args();
@@ -91,7 +103,12 @@
         $goals = [];
         foreach($goalslugs as $goalslug) {
             $url = sprintf($urlfmt, $username, trim($goalslug), $token);
-            $goaljsonstring = file_get_contents($url);
+            try {
+                $goaljsonstring = fget_contents($url);
+            } catch (Exception $e) {
+                echo "Catastrophe! Failed to get details for a goal!";
+                exit;
+            }
             $goal = json_decode($goaljsonstring);
             $goals[] = $goal;
         }
