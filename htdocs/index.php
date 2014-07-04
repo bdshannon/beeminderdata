@@ -48,7 +48,7 @@
             private function toHtmlTableHeader() {
                 $html = "<thead><tr>";
                 foreach(array_keys($this->headers) as $header) {
-                    $html .= sprintf("<th>%s</th>", ucwords($header));
+                    $html .= sprintf("<th>%s</th>", htmlentities(ucwords($header)));
                 }
                 unset($header);
                 $html .= "</tr></thead>";
@@ -60,7 +60,7 @@
                 foreach($this->data as $dataobj) {
                     $html .= "<tr>";
                     foreach($this->headers as $propname) {
-                        $html .= sprintf("<td>%s</td>", $dataobj->{$propname});
+                        $html .= sprintf("<td>%s</td>", htmlentities($dataobj->{$propname}));
                     }
                     unset($propname);
                     $html .= "</tr>";
@@ -97,11 +97,11 @@
         }
 
         array_map(function($goal) {
-            $goal->losedatestring = date("d-m-y", $goal->losedate);
+            $goal->losedatestring = htmlentities(date("d-m-y", $goal->losedate));
         }, $goals);
 
         array_map(function($goal) {
-           $goal->pledgestring = sprintf("$%s", $goal->pledge);
+           $goal->pledgestring = htmlentities(sprintf("$%s", $goal->pledge));
         }, $goals);
 
         array_map(function($goal) {
