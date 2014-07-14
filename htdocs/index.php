@@ -28,9 +28,26 @@
     <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap-theme.min.css">
     <!-- Latest compiled and minified JavaScript -->
     <script src="//netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js"></script>
+    <style>
+    .header
+    {
+        position: relative;
+        padding: 30px 15px;
+        color: #CDBFE3;
+        text-align: center;
+        text-shadow: 0px 1px 0px rgba(0, 0, 0, 0.1);
+        background-color: #6F5499;
+        background-image: linear-gradient(to bottom, #563D7C 0px, #6F5499 100%);
+        background-repeat: repeat-x;
+    }
+    </style>
 </head>
 <body>
-    <p>I have stuff to do. These are some of those things.</p>
+    <div class="header">
+        <h1>Goals</h1>
+        <p>What I want to do, by when and how much I'm willing to bet I do it</p>
+    </div>
+    <div class="container">
     <?php
         function fget_contents() {
             $args = func_get_args();
@@ -142,5 +159,6 @@
         $tbuilder->css_classes[] = "table";
         echo $tbuilder->toHtml();
     ?>
+    </div> <!-- div container -->
 </body>
 </html>
