@@ -45,9 +45,15 @@
 <body>
     <div class="header">
         <h1>Goals</h1>
-        <p>What I want to do, by when and how much I'm willing to bet I do it</p>
+        <p>What I want to do, by when and how much it'll sting if I don't do it</p>
     </div>
     <div class="container">
+    <p>
+        The way it works: I make an ongoing measurable goal. If I keep to my goal on an ongoing basis, great. Otherwise, the sting kicks in and I lose cold, hard cash.
+    </p>
+    <p>
+        Below you have the (hopefully descriptive) names of my goals, when I'll lose if I do nothing (if I study enough in one week, I don't have to study much the next) and the amount I'd lose on that date.
+    </p>
     <?php
         function fget_contents() {
             $args = func_get_args();
