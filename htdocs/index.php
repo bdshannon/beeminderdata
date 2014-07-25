@@ -131,7 +131,7 @@
             try {
                 $goaljsonstring = fget_contents($url);
             } catch (Exception $e) {
-                echo "Catastrophe! Failed to get details for a goal!";
+                echo "Catastrophe! Failed to get details for goal \"$goalslug\"!";
                 exit;
             }
             $goal = json_decode($goaljsonstring);
