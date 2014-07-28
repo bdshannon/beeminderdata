@@ -168,5 +168,8 @@
         echo $tbuilder->toHtml();
     ?>
     </div> <!-- div container -->
+    <footer>
+        <p class="text-center">Powered by <a href="https://www.beeminder.com/">Beeminder</a></p>
+    </footer>
 </body>
 </html>
